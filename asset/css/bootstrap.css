@@ -43,7 +43,7 @@ template {
   display: none;
 }
 a {
-  background-color: transparent;
+  background-color: green;
 }
 a:active,
 a:hover {
@@ -198,7 +198,7 @@ th {
   *:after {
     color: #000 !important;
     text-shadow: none !important;
-    background: transparent !important;
+    background: green !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }

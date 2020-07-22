@@ -1,9 +1,10 @@
+
 <?php
 require_once 'include/_view/header.php';
 require_once 'include/include.php';
 
 
-$materiels =selectAll('materiels');
+$materiels = selectAll('materiels');
 
 
 if(isset($_POST)){
@@ -23,7 +24,6 @@ if(isset($_POST)){
 
   }
 }
-
 
 
 

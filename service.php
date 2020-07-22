@@ -26,7 +26,7 @@ if(isset($_POST)){
 
 <div class="container"> 
 
-<h1> Enregistre une nouvelle panne</h1>
+<h1> nom du service</h1>
 
 <form  method="POST">
   <div class="form-group">

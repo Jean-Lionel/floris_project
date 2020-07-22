@@ -22,8 +22,6 @@ function insert($table,$table_name){
 
 	$q = $db->prepare($queryString);
 
-	var_dump();
-
 	if($q->execute($tab)){
 
 		return true;
@@ -43,6 +41,24 @@ function selectAll($table){
 	$sql = $db->query($query);
 
 	return $sql->fetchAll();
+}
 
+function selectById($table , $id){
+	$query = "SELECT * FROM ".$table." WHERE id = ". $id;
+
+	$db = seconnecter();
+
+	$sql = $db->query($query);
+	
+	return $sql->fetchAll();
 
 }
+
+
+function deleteById($table , $id){
+      $db = seconnecter();
+      $query = "DELETE FROM ".$table." WHERE id =".$id;
+      $sql = $db->query($query);
+
+      return $sql;
+ }
