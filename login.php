@@ -1,6 +1,7 @@
 <?php
 require_once 'include/include.php';
 
+$error = null;
 
 if(isset($_POST['connect'])){
 	$user_name = $_POST['login'];
@@ -15,11 +16,13 @@ if(isset($_POST['connect'])){
 	$row = $result->fetchAll();
 
 	if(count($row) > 0){
+		session_start();
 		$user = $row[0];
-
-		$_SESSION['user_connect'] = $user;
+		$_SESSION['user'] = $user;
 		header('Location: index.php');
 		exit;
+	}else{
+		$error = 'Indéntifiants incorrectes';
 	}
 
 }
@@ -37,10 +40,19 @@ if(isset($_POST['connect'])){
 
 	<link rel="stylesheet" href="asset/css/bootstrap.css">
 	<link rel="stylesheet" href="asset/css/login.css">
-	<script src="include/js/jquery-3.5.1.min.js"></script>
+	
 </head>
-<body>
-	<div class="login-form" style="width:600px">
+<body style="">
+	<div class="container login-page col-md-4">
+		
+		<?php if($error) : ?>
+			<div class="alert alert-danger">
+				<?= $error ?>
+			</div>
+		<?php endif;?>
+		<div>
+
+
 
 		<form action="" method="post">
 			<div class="form-group row">
@@ -48,7 +60,7 @@ if(isset($_POST['connect'])){
 					<label for="user_name">Utilisateur</label>
 				</div>
 				<div class="col-md-7">
-					<input type="text" name="login" class="form-control">
+					<input type="text" placeholder="Nom d'utilisateur" name="login" class="form-control">
 				</div>
 			</div>
 
@@ -57,7 +69,7 @@ if(isset($_POST['connect'])){
 					<label for="user_name">Mot de pass</label>
 				</div>
 				<div class="col-md-7">
-					<input type="password" name="password" class="form-control">
+					<input type="password" placeholder="Mot de pass" name="password" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -72,6 +84,8 @@ if(isset($_POST['connect'])){
 
 	</div>
 
+	</div>
+	
 
 </body>
 </html>

@@ -62,3 +62,25 @@ function deleteById($table , $id){
 
       return $sql;
  }
+
+ //la function permettant de verifier qu'utilisateur est connecter
+ //Retourne boolean or array
+
+ function checkConnectedUser($authencate_user){
+ 	if($authencate_user == null){
+ 		header('Location : login.php');
+ 		exit;
+ 	}else{
+ 		return $authencate_user;
+ 	}
+ }
+
+ //Function returnant de l utilisateur connecter
+
+
+ function get_user_type($user){
+ 	//Condition ternaire 
+
+ 	return $user['role'] == 'ADMIN' ? true : false;
+
+ }
