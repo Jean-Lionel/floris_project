@@ -39,6 +39,9 @@ if (isset($_POST['save'])) {
 }
 
 
+$intervantions = selectAll('intervantion');
+
+
 // INSERT INTO `intervantion`(`id`, `date_intervation`, `resultat`, `techinicien_id`, `materiel_id`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])
 
 ?>
@@ -97,6 +100,46 @@ if (isset($_POST['save'])) {
 
 		
 	</form>
+
+
+	<div class="container">
+		<table class="table table-sm table-borderded">
+			<header>
+				<th> Date d'intervention</th>
+				<th>Resultat</th>
+				<th>Panne</th>
+				<th>Technicien</th>
+				<th>Action</th>
+			</header>
+
+			<body>
+
+				<?php foreach ($intervantions  as $intervantion): ?>
+					<tr>
+						<td>
+							<?= $intervantion['date_intervation'] ?>
+						</td>
+						<td>
+							<?= $intervantion['resultat'] ?>
+						</td>
+						<td>
+							<?= $intervantion['panne_id'] ?>
+						</td>
+						<td>
+							<?= $intervantion['techinicien_id'] ?>
+						</td>
+						<td>
+							
+							<a href="intervention_del.php?id=<?= $intervantion['id']?>">Delete</a>
+						</td>
+					
+					</tr>
+					
+				<?php endforeach ?>
+
+			</body>
+		</table>
+	</div>
 
 </div>
 

@@ -30,6 +30,8 @@ if(isset($_POST)){
   }
 }
 
+$pannes = selectAll('pannes');
+
 
 
 ?>
@@ -67,6 +69,46 @@ if(isset($_POST)){
   </div>
   
 </form>
+
+<div>
+  <table class="table table-sm table-bordered table-responsive table-warning">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Numero du materiel</th>
+        <th>Date du panne</th>
+        <th>Action</th>
+      </tr>
+      
+    </thead>
+
+    <tbody>
+
+      <?php foreach ($pannes  as $panne): ?>
+        <tr>
+          <td>
+            <?= $panne['nom'] ?>
+            
+          </td>
+          <td>
+            <?= $panne['materiel_id'] ?>
+          
+          </td>
+
+          <td>
+              <?= $panne['date_panne'] ?>
+          </td>
+
+          <td>
+            <a href="effacer.php?table=pannes&id=<?= $panne['id'] ?>">Effacer</a>
+          </td>
+        </tr>
+        
+      <?php endforeach ?>
+      
+    </tbody>
+  </table>
+</div>
 
 
 </div>

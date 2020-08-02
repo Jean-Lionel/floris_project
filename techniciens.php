@@ -24,11 +24,16 @@ if ($db->exec($req)) {
 
 }
 
+$techniciens = selectAll('techniciens');
+
 ?>
 
 
 <div class="container">
-	<div class="col-md-6 col-md-offset-3">
+	<div class="row">
+		
+	
+	<div class="col-md-6">
 		<form action="#" method="post">
 			<div class="form-group">
 				<label for="nom">Nom</label>
@@ -51,6 +56,38 @@ if ($db->exec($req)) {
 			</div>
 
 		</form>
+	</div>
+
+	<div class="col-md-6">
+
+		<table class="table-sm table-striped table table-bordered">
+
+		<thead>
+			<th>Nom</th>
+			<th>Prenom</th>
+			<th>Telephone</th>
+			<th>Action</th>
+
+		</thead>
+
+		<tbody>
+			<?php foreach ($techniciens as $technicien): ?>
+
+				<tr>
+					<td><?= $technicien['nom']?></td>
+					<td><?= $technicien['prenom']?></td>
+					<td><?= $technicien['telephone']?></td>
+					<td><a href="effacer.php?table=techniciens&id=<?= $technicien['id']?>">Delete</a></td>
+					
+				</tr>
+				
+			<?php endforeach ?>
+		</tbody>
+
+		</table>
+		
+	</div>
+
 	</div>
 </div>
 

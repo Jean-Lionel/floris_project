@@ -6,11 +6,16 @@ require_once 'include/include.php';
 $materiels = selectAll('materiels');
 $services = selectAll('services');
 
+$materiels_services = execute_query('SELECT * FROM services JOIN affectation on affectation.service_id = services.id');
+
+
+
+
 if (isset($_POST['save'])) {
 
 	$date_affectation = date('Y').'-'.date('m').'-'.date('d');
 
-	$request = "INSERT INTO `affectation`(`service_id`, `materiel_id`, `date_affectation`) VALUES (".$_POST['service_id'].",".$_POST['service_id'].",'".$date_affectation."')";
+	$request = "INSERT INTO `affectation`(`service_id`, `materiel_id`, `date_affectation`) VALUES (".$_POST['service_id'].",".$_POST['materiel_id'].",'".$date_affectation."')";
 
 	 $db = seconnecter();
 
@@ -58,11 +63,56 @@ if (isset($_POST['save'])) {
 				<div class="form-group">
 					<label for=""></label>
 					<button type="submit" name="save" class="btn btn-primary btn-block">Enregistre</button>
+					
 				</div>
 				
 			</div>
 		</div>
 	</form> 
+
+
+	<div class="col-md-12">
+
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-hover table-bordered">
+
+					<thead>
+						<th>SERVICE</th>
+						<th>MATERIEL</th>
+						<th>DATE</th>
+					</thead>
+
+					<tbody>
+						<?php foreach ($materiels_services as  $value): ?>
+
+							<tr>
+								<td>
+					
+									<?= $value['nom']?>
+								</td>
+								<td>
+									<?php 
+
+									$table =get_name_byID('materiels',$value['materiel_id']);
+									echo $table[0]['nom'].' - # '. $table[0]['numero_serie'];
+
+
+									?>
+								</td>
+								<td>
+									<?= $value['date_affectation']?>
+								</td>
+							</tr>
+							
+						<?php endforeach ?>
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+		
+	</div>
 	
 </div>
 

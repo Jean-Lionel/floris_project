@@ -84,3 +84,25 @@ function deleteById($table , $id){
  	return $user['role'] == 'ADMIN' ? true : false;
 
  }
+
+ //Excute query
+
+ function execute_query($sql)
+ {
+ 	$db = seconnecter();
+
+ 	$result = $db->query($sql);
+
+ 	return $result->fetchAll();
+ }
+
+ function get_name_byID($table,$id )
+ {
+
+ 	
+
+ 	$result = execute_query('SELECT * from '.$table.' WHERE id = '.$id);
+
+
+ 	return $result;
+ }

@@ -32,16 +32,17 @@ if(isset($_POST)){
 
 <div class="container"> 
 
-<h1> nom du service</h1>
+<h1> Nom du service</h1>
 
 <form  method="POST">
-  <div class="form-group">
+  <div class="form-group col-md-5">
     <label for="nom">Nom</label>
     <input type="text" class="form-control" id="nom" name="nom">
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group col-md-5">
+
     <input type="submit" class="btn btn-primary"  value="Enregistre">
     
   </div>
