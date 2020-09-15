@@ -17,7 +17,11 @@ $pannes = selectAll('pannes');
 $db = seconnecter();
 
 if (isset($_POST['save'])) {
+
+
 	# code...
+
+
 
 	$request = "INSERT INTO `intervantion`(`date_intervation`, `resultat`, `panne_id`, `techinicien_id`, `materiel_id`) VALUES (
 	'". $_POST['date_intervation'] ."','".$_POST['resultat']."',".$_POST['panne_id'].",
@@ -25,13 +29,26 @@ if (isset($_POST['save'])) {
 )";
 
 
-	$db = seconnecter();
+$db = seconnecter();
 
-    if($db->exec($request)){
-      echo " <script> Enregistrement réussi </script>";
-    }else{
-      echo "ERROR";
-    }
+$date_panne = $_POST['date_intervation'];
+
+$current_date = date('Y').'-'.date('m').'-'.date('d');
+
+if( $date_panne > $current_date ){
+
+	echo "<script> alert('La date choisit invalide') </script>";
+}else{
+
+	if($db->exec($request)){
+		echo " <script> Enregistrement réussi </script>";
+	}else{
+		echo "ERROR";
+	}
+
+}
+
+
 
 
 
@@ -69,6 +86,7 @@ $intervantions = selectAll('intervantion');
 			<div class="form-group">
 				<label for="">Nom du technicien en service</label>
 				<select name="techinicien_id" id="" class="form-control">
+					<option value=""> </option>
 					<?php foreach ($techniciens as $technicien): ?>
 						<option value="<?= $technicien['id'] ?>"> <?= $technicien['nom'].'
 						'.$technicien['prenom'] ?></option>
@@ -132,7 +150,7 @@ $intervantions = selectAll('intervantion');
 							
 							<a href="intervention_del.php?id=<?= $intervantion['id']?>">Delete</a>
 						</td>
-					
+
 					</tr>
 					
 				<?php endforeach ?>

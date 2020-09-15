@@ -12,19 +12,32 @@ require_once 'include/include.php';
 $materiels = selectAll('materiels');
 
 
-if(isset($_POST)){
+if(isset($_POST['save'])){
 
-  if(!empty($_POST)){
-    $query = "INSERT INTO `pannes`(`nom`, `materiel_id`, `date_panne`) 
-    VALUES ('".$_POST['nom']."','".$_POST['materiel_id'].
-    "','".$_POST['date_panne']."')";
+  $date_panne = $_POST['date_panne'];
 
-    $db = seconnecter();
+  $current_date = date('Y').'-'.date('m').'-'.date('d');
 
-    if($db->exec($query)){
-      echo "Ok ok";
-    }else{
-      echo "ERROR";
+  if( $date_panne > $current_date ){
+
+    echo "<script> alert('La date choisi invalide') </script>";
+  } else{
+
+
+
+    if(!empty($_POST)){
+      $query = "INSERT INTO `pannes`(`nom`, `materiel_id`, `date_panne`) 
+      VALUES ('".$_POST['nom']."','".$_POST['materiel_id'].
+      "','".$_POST['date_panne']."')";
+
+      $db = seconnecter();
+
+      if($db->exec($query)){
+        echo "Ok ok";
+      }else{
+        echo "ERROR";
+      }
+
     }
 
   }
@@ -39,80 +52,90 @@ $pannes = selectAll('pannes');
 
 <div class="container"> 
 
-<h1> Enregistre une nouvelle panne</h1>
+  <h1> Enregistre une nouvelle panne</h1>
 
-<form  method="POST">
-  <div class="form-group">
-    <label for="nom">Nom</label>
-    <input type="text" class="form-control" id="nom" name="nom">
-  </div>
-  <div class="form-group">
-    <label for="materiel_id">Materielle</label>
-    <select class="form-control" id="materiel_id" name="materiel_id">
+  <form  method="POST">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" class="form-control" id="nom" name="nom">
+    </div>
+    <div class="form-group">
+      <label for="materiel_id">Materielle</label>
+      <select class="form-control" id="materiel_id" name="materiel_id">
 
-      <?php foreach ($materiels  as $materiel) : ?>
+        <?php foreach ($materiels  as $materiel) : ?>
 
-        <option value="<?= $materiel['id'] ?>"> <?php echo $materiel['nom'].' - '.$materiel['numero_serie']; ?></option>
-       <?php endforeach; ?>
-      
-    </select>
-  </div>
+          <option value="<?= $materiel['id'] ?>"> <?php echo $materiel['nom'].' - '.$materiel['numero_serie']; ?></option>
+        <?php endforeach; ?>
 
-  <div class="form-group">
-    <label for="date_panne">Date de la panne</label>
-    <input type="date" class="form-control" id="date_panne" name="date_panne">
-  </div>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <input type="submit" class="btn btn-primary"  value="Enregistre">
-    
-  </div>
-  
-</form>
+    <div class="form-group">
+      <label for="date_panne">Date de la panne</label>
+      <input type="date" class="form-control" id="date_panne" name="date_panne">
+    </div>
 
-<div>
-  <table class="table table-sm table-bordered table-responsive table-warning">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Numero du materiel</th>
-        <th>Date du panne</th>
-        <th>Action</th>
-      </tr>
-      
-    </thead>
+    <div class="form-group">
+      <input type="submit" name="save" class="btn btn-primary"  value="Enregistre">
 
-    <tbody>
+    </div>
 
-      <?php foreach ($pannes  as $panne): ?>
+  </form>
+
+  <div>
+    <table class="table table-sm table-bordered table-responsive table-warning">
+      <thead>
         <tr>
-          <td>
-            <?= $panne['nom'] ?>
-            
-          </td>
-          <td>
-            <?= $panne['materiel_id'] ?>
-          
-          </td>
-
-          <td>
-              <?= $panne['date_panne'] ?>
-          </td>
-
-          <td>
-            <a href="effacer.php?table=pannes&id=<?= $panne['id'] ?>">Effacer</a>
-          </td>
+          <th>Nom</th>
+          <th>Numero du materiel</th>
+          <th>Date du panne</th>
+          <th>Action</th>
         </tr>
-        
-      <?php endforeach ?>
-      
-    </tbody>
-  </table>
-</div>
+
+      </thead>
+
+      <tbody>
+
+        <?php foreach ($pannes  as $panne): ?>
+          <tr>
+            <td>
+              <?= $panne['nom'] ?>
+
+            </td>
+            <td>
+              <?= $panne['materiel_id'] ?>
+
+            </td>
+
+            <td>
+              <?= $panne['date_panne'] ?>
+            </td>
+
+            <td>
+              <a href="effacer.php?table=pannes&id=<?= $panne['id'] ?>">Effacer</a>
+            </td>
+          </tr>
+
+        <?php endforeach ?>
+
+      </tbody>
+    </table>
+  </div>
 
 
 </div>
 
+<script>
+
+  $(function() {
+
+
+
+  });
+  
+
+</script>
 
 <?php
 require_once 'include/_view/footer.php';

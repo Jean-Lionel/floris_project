@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 if(session_status() === PHP_SESSION_NONE){
     session_start();
@@ -16,8 +16,9 @@ if(session_status() === PHP_SESSION_NONE){
 
   <link rel="stylesheet" href="asset/css/bootstrap.css">
   <script src="include/js/jquery-3.5.1.min.js"></script>
+  
 </head>
-<body>
+<body style="background:#abc;">
 
 	<nav class="navbar navbar-inverse navbar-static-top-top">
     <div class="container">
@@ -37,13 +38,14 @@ if(session_status() === PHP_SESSION_NONE){
           <li><a href="panne.php">PANNES</a></li>
           <li><a href="service.php">SERVICES</a></li>
           <li><a href="affectation.php">AFFECTATION</a></li>
-
+         
 
           <?php if($_SESSION['user']['role'] === 'ADMIN' ):  ?>
 
           
             <li><a href="intervation.php">INTERVENTION</a></li>
-            <li><a href="techniciens.php">Techniciens</a></li>
+            <li><a href="techniciens.php">TECHNICIENS</a></li>
+            <li><a href="manifestation.php">Manifestation</a></li>
             <li><a href="utilisateur.php">Utilisateurs</a></li>
 
           <?php endif; ?>

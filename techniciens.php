@@ -77,7 +77,7 @@ $techniciens = selectAll('techniciens');
 					<td><?= $technicien['nom']?></td>
 					<td><?= $technicien['prenom']?></td>
 					<td><?= $technicien['telephone']?></td>
-					<td><a href="effacer.php?table=techniciens&id=<?= $technicien['id']?>">Delete</a></td>
+					<td><a href="effacer.php?table=techniciens&id=<?= $technicien['id']?>">SUPRIMER</a></td>
 					
 				</tr>
 				

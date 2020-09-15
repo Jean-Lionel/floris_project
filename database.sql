@@ -53,3 +53,11 @@ CREATE TABLE affectation(
 
 );
 
+CREATE TABLE manifestation(
+id int PRIMARY key AUTO_INCREMENT,
+materiel_id int,
+panne_id int,
+description
+date
+
+);

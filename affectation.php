@@ -8,9 +8,6 @@ $services = selectAll('services');
 
 $materiels_services = execute_query('SELECT * FROM services JOIN affectation on affectation.service_id = services.id');
 
-
-
-
 if (isset($_POST['save'])) {
 
 	$date_affectation = date('Y').'-'.date('m').'-'.date('d');
@@ -20,7 +17,7 @@ if (isset($_POST['save'])) {
 	 $db = seconnecter();
 
 	 if ($db->exec($request)) {
-	 	echo "<script>alert('Enregistre reussi') </script>";
+	 	echo "<script>alert('Enregistrement réussi') </script>";
 	 }else{
 	 	echo "alert('Error')";
 	 }
@@ -31,8 +28,9 @@ if (isset($_POST['save'])) {
 
 
 
+
 <div class="container">
-	<form action="#" method="post">
+	<form action="" method="post">
 		<div class="row">
 			<div class="form-group col-md-3">
 				<label for="email">Nom du materiel</label>
@@ -95,14 +93,25 @@ if (isset($_POST['save'])) {
 									<?php 
 
 									$table =get_name_byID('materiels',$value['materiel_id']);
-									echo $table[0]['nom'].' - # '. $table[0]['numero_serie'];
 
+									// echo "<pre>";
 
+									// var_dump($table);
+
+									// echo "</pre>";
+
+									if(count($table) > 0){
+										echo $table[0]['nom'].' -  '. $table[0]['numero_serie'];
+
+									}
+									
 									?>
-								</td>
+								</td> 
 								<td>
 									<?= $value['date_affectation']?>
 								</td>
+								<td><a href="affectation_delete.php?service_id=<?= $value['service_id']?> & materiel_id=<?=$value['materiel_id'] ?>">Delete</a></td>
+					
 							</tr>
 							
 						<?php endforeach ?>

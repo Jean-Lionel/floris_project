@@ -96,6 +96,12 @@ function deleteById($table , $id){
  	return $result->fetchAll();
  }
 
+ function delete_querry($sql){
+ 	$db = seconnecter();
+ 	$result = $db->query($sql);
+
+ }
+
  function get_name_byID($table,$id )
  {
 
