@@ -46,6 +46,7 @@ if(session_status() === PHP_SESSION_NONE){
             <li><a href="intervation.php">INTERVENTION</a></li>
             <li><a href="techniciens.php">TECHNICIENS</a></li>
             <li><a href="manifestation.php">Manifestation</a></li>
+            <li><a href="rapport.php">Rapport</a></li>
             <li><a href="utilisateur.php">Utilisateurs</a></li>
 
           <?php endif; ?>
